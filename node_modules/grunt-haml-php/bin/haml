@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+<?php
+
+require dirname(__FILE__) . '/../vendor/autoload.php';
+
+function usage() {
+  global $argv;
+
+  fwrite(STDERR, "Usage: $argv[0] <inputFile> [outputFile]\n");
+  exit(1);
+}
+
+function main() {
+  global $argv, $argc;
+
+  if ($argc < 2 || $argc > 3)
+    usage();
+
+  $haml = new MtHaml\Environment('php', array('enable_escaper' => false,'escape_attrs' => false));
+
+  $input = @file_get_contents($argv[1]);
+  if ($input === false) {
+    fwrite(STDERR, "Unable to open $argv[1]\n");
+    exit(1);
+  }
+
+  try {
+    $output = $haml->compileString($input, $argv[1]);
+  } catch (Exception $e) {
+    fwrite(STDERR, $e->getMessage() . "\n");
+    exit(1);
+  }
+  $output = str_replace('<?php echo \'<?\'; ?>','<?',$output);
+  if ($argc == 3) {
+    file_put_contents($argv[2], $output);
+  } else {
+    echo $output;
+  }
+}
+
+main();
+
+# vim: ft=php

@@ -1,0 +1,31 @@
+{
+	"name": "roots-haml-compass-coffeescript",
+  "version": "1.0",
+  "author": "Daniele Scasciafratte <mte90net@gmail.com>",
+  "homepage": "http://mte90.net",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Mte90/roots-haml-compass-coffeescript.git"
+  },
+  "bugs": {
+	  "url" : "https://github.com/Mte90/roots-haml-compass-coffeescript/issues"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "http://opensource.org/licenses/MIT"
+  }],
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.9.2",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-compass": "~0.7.2",
+	"grunt-contrib-imagemin": "~0.5.0",
+    "grunt-wp-version": "~0.1.0"
+  }
+}

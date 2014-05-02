@@ -1,0 +1,55 @@
+{
+  "name": "grunt-haml-php",
+  "description": "Process HAML templates using MtHaml, a PHP port of Haml.",
+  "version": "0.2.1",
+  "homepage": "https://github.com/alexluke/grunt-haml-php",
+  "author": {
+    "name": "Alex Luke",
+    "email": "alexl@bnj.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexluke/grunt-haml-php.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexluke/grunt-haml-php/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/alexluke/grunt-haml-php/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "install": "composer install",
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1",
+    "grunt-release": "~0.6.0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin",
+    "grunt",
+    "haml",
+    "php",
+    "mthaml"
+  ],
+  "dependencies": {
+    "async": "~0.2.9"
+  },
+  "readme": "# grunt-haml-php\n\n> Process HAML templates using MtHaml, a PHP port of Haml.\n\n## Getting Started\nThis plugin requires Grunt `~0.4.1`\n\nIf you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:\n\n```shell\nnpm install grunt-haml-php --save-dev\n```\n\nOnce the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:\n\n```js\ngrunt.loadNpmTasks('grunt-haml-php');\n```\n\n## The \"haml\" task\n\nThis plugin requires [composer](http://getcomposer.org/) in order to install PHP dependencies. Please follow the [installation instructions](http://getcomposer.org/doc/00-intro.md#system-requirements) before installing this plugin.\n\n### Overview\nIn your project's Gruntfile, add a section named `haml` to the data object passed into `grunt.initConfig()`.\n\n```js\ngrunt.initConfig({\n  haml: {\n    options: {\n      // Task-specific options go here.\n    },\n    your_target: {\n      // Target-specific file lists and/or options go here.\n    },\n  },\n})\n```\n\n### Options\n\n#### options.writeError\nType: `Boolean`\nDefault value: `true`\n\nIf enabled, write any compile errors to the output file. Otherwise do nothing.\n\n### Usage Examples\n\n#### Simple file mapping\n\n```js\ngrunt.initConfig({\n  haml: {\n    files: {\n      'dest/file1.html': ['src/file1.haml'],\n    },\n  },\n})\n```\n\n#### All haml files\nThis example compiles all haml files in a directory and adds a php extension.\n\n```js\ngrunt.initConfig({\n  haml: {\n    files: [{\n      expand: true,\n      src: ['src/templates/**/*.haml'],\n      dest: 'dest/templates',\n      ext: '.php'\n    }],\n  },\n})\n```\n\n## Contributing\nIn lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).\n\n## Release History\n\n* 12/9/2013 - v0.2.1 - Catch all php errors, regardless of system settings\n* 11/20/2013 - v0.2.0 - Add option for writing errors to output file\n* 11/14/2013 - v0.1.0 - Initial release.\n",
+  "readmeFilename": "README.md",
+  "_id": "grunt-haml-php@0.2.1",
+  "_from": "grunt-haml-php@~0.2.1"
+}
