@@ -19,7 +19,7 @@
       ?>
       <li class="previous">
         <?php
-          	previous_comments_link(__('&larr; Older comments', 'roots'));
+          previous_comments_link(__('&larr; Older comments', 'roots'));
         ?>
       </li>
       <?php
@@ -28,7 +28,7 @@
       ?>
       <li class="next">
         <?php
-          	next_comments_link(__('Newer comments &rarr;', 'roots'));
+          next_comments_link(__('Newer comments &rarr;', 'roots'));
         ?>
       </li>
       <?php
@@ -63,7 +63,7 @@
   <?php
     } else {
   ?>
-  <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
+  <form id="commentform" action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post">
     <?php
       if (is_user_logged_in()) {
     ?>
@@ -110,7 +110,7 @@
       <textarea name="comment" id="comment" class="form-control" rows="5" aria-required="true"></textarea>
     </div>
     <p>
-      <input name="submit" class="btn btn-primary" type="submit" id="submit" value="<?php _e('Submit Comment', 'roots'); ?>">
+      <input class="btn btn-primary" id="submit" name="submit" type="submit" value="<?php _e('Submit Comment', 'roots'); ?>">
     </p>
     <?php
       comment_id_fields();

@@ -1,6 +1,6 @@
 - get_avatar($comment, $size = '64')
-%div(class="media-body")
-	%h4(class="media-heading")
+%div.media-body
+	%h4.media-heading
 		- echo get_comment_author_link()
 	%time(datetime="<?php echo comment_date('c'); ?>")
 		%a(href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)); ?>")

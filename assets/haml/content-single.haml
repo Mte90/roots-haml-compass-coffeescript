@@ -3,10 +3,10 @@
 		the_post();
 <article <?php post_class(); ?>>
 %header
-	%h1(class="entry-title")= the_title()
+	%h1.entry-title= the_title()
 	:php
 		get_template_part('templates/entry-meta');
-%div(class="entry-content")= the_content()
+%div.entry-content= the_content()
 %footer= wp_link_pages(array('before' => '<nav class="page-nav"><p>' . __('Pages:', 'roots'), 'after' => '</p></nav>'))
 :php
 	comments_template('/templates/comments.php');

@@ -1,6 +1,6 @@
-%time(class="published" datetime="<?php echo get_the_time('c'); ?>")= get_the_date()
-%p(class="byline author vcard")
+%time.published(datetime="<?php echo get_the_time('c'); ?>")= get_the_date()
+%p.byline.author.vcard
 	:php
 		echo __('By', 'roots');
-	%a(href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn")= get_the_author()
+	%a.fn(href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author")= get_the_author()
 
