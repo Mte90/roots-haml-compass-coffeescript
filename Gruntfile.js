@@ -100,7 +100,7 @@ module.exports = function(grunt) {
     watch: {
       haml: {
         files: ['assets/haml/*.haml'],
-        task: ['haml']
+        tasks: ['haml']
       },
       compass: {
         files: [
