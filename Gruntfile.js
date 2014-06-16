@@ -27,7 +27,8 @@ module.exports = function(grunt) {
           noLineComments: false,
           sassDir: 'assets/sass',
           cssDir: 'assets/css',
-          outputStyle: 'expanded'
+		  outputStyle: 'expanded',
+		  relativeAssets: true
         }
       }
     },
