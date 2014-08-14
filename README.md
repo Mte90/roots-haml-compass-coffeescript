@@ -10,6 +10,7 @@
 * compass - grunt use compass for compile the SASS files
 * Gruntfile.js - modded for the new settings
 * lib/scripts.php - added a rule for WP_DEBUG enabled for insert livereload.js in the template
+* Use WP_DEBUG instead WP_ENV
     
 ##Roots Readme
 
@@ -25,7 +26,7 @@ Roots is a WordPress starter theme based on [HTML5 Boilerplate](http://html5boil
 
 ## Installation
 
-Clone the git repo - `git clone git://github.com/roots/roots.git` - or [download it](https://github.com/roots/roots/zipball/master) and then rename the directory to the name of your theme or website. [Install Grunt](http://gruntjs.com/getting-started), and then install the dependencies for Roots contained in `package.json` by running the following from the Roots theme directory:
+Clone the git repo - `git clone https://github.com/Mte90/roots-haml-compass-coffeescript` - or [download it](https://github.com/Mte90/roots-haml-compass-coffeescript/zipball/master) and then rename the directory to the name of your theme or website. [Install Grunt](http://gruntjs.com/getting-started), and then install the dependencies for Roots contained in `package.json` by running the following from the Roots theme directory:
 
 ```
 npm install
@@ -33,15 +34,22 @@ npm install
 
 Reference the [theme activation](http://roots.io/roots-101/#theme-activation) documentation to understand everything that happens once you activate Roots.
 
+PS: in `node_modules` there is  grunt-haml-php modded for the last version of MTHAML and fix for the compile.
+
 ## Theme Development
 
-After you've installed Grunt and ran `npm install` from the theme root, use `grunt watch` to watch for updates to your LESS and JS files and Grunt will automatically re-build as you write your code.
+After you've installed Grunt and ran `npm install` from the theme root, use `grunt dev` to watch for updates to your files files and Grunt will automatically re-build as you write your code.
 
 ## Configuration
 
 Edit `lib/config.php` to enable or disable support for various theme functions and to define constants that are used throughout the theme.
 
 Edit `lib/init.php` to setup custom navigation menus and post thumbnail sizes.
+
+## Available Grunt commands
+
+`grunt dev` — Compile assets when file changes are made
+`grunt` — Create minified assets that are used on non-development environments
 
 ## Documentation
 
