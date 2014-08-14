@@ -30,11 +30,13 @@ class Roots_Sidebar {
   }
 
   private function check_conditional_tag($conditional_tag) {
-    if (is_array($conditional_tag)) {
-      return $conditional_tag[0]($conditional_tag[1]);
-    } else {
-      return $conditional_tag();
-    }
+	$conditional_arg = is_array($conditional_tag) ? $conditional_tag[1] : false;
+	$conditional_tag = $conditional_arg ? $conditional_tag[0] : $conditional_tag;
+	if (function_exists($conditional_tag)) {
+		return $conditional_arg ? $conditional_tag($conditional_arg) : $conditional_tag();
+	} else {
+		return false;
+	}
   }
 
   private function check_page_template($page_template) {
