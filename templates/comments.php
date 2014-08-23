@@ -5,7 +5,11 @@
   if (have_comments()) {
 ?>
 <section id="comments">
-  <h3><?php echo printf(_n('One Response to &ldquo;%2$s&rdquo;', '%1$s Responses to &ldquo;%2$s&rdquo;', get_comments_number(), 'roots'), number_format_i18n(get_comments_number()), get_the_title()); ?></h3>
+  <h3>
+    <?php
+      printf(_n('One Response to &ldquo;%2$s&rdquo;', '%1$s Responses to &ldquo;%2$s&rdquo;', get_comments_number(), 'roots'), number_format_i18n(get_comments_number()), get_the_title())
+    ?>
+  </h3>
   <ol class="media-list">
     <?php wp_list_comments(array('walker' => new Roots_Walker_Comment)); ?>
   </ol>

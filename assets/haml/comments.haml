@@ -4,7 +4,9 @@
 	}
 	if (have_comments()) {
 %section#comments
-	%h3= printf(_n('One Response to &ldquo;%2$s&rdquo;', '%1$s Responses to &ldquo;%2$s&rdquo;', get_comments_number(), 'roots'), number_format_i18n(get_comments_number()), get_the_title())
+	%h3
+		:php
+			printf(_n('One Response to &ldquo;%2$s&rdquo;', '%1$s Responses to &ldquo;%2$s&rdquo;', get_comments_number(), 'roots'), number_format_i18n(get_comments_number()), get_the_title())
 	%ol.media-list
 		- wp_list_comments(array('walker' => new Roots_Walker_Comment))
 	:php
@@ -40,7 +42,10 @@
 	%p.cancel-comment-reply= cancel_comment_reply_link()
 	:php
 		if (get_option('comment_registration') && !is_user_logged_in()) {
-	%p= printf(__('You must be <a href="%s">logged in</a> to post a comment.', 'roots'), wp_login_url(get_permalink()))
+	%p
+			:php
+				printf(__('Logged in as <a href="%s/wp-admin/profile.php">%s</a>.', 'roots'), get_option('siteurl'), $user_identity)
+		%a(href="<?php wp_logout_url(get_permalink()); ?>" title="<?php __('Log out of this account', 'roots'); ?>")= __('Log out &raquo;', 'roots')
 	:php
 		} else {
 	%form#commentform(action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post")
