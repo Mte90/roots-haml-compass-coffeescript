@@ -1,5 +1,5 @@
 /*!
- * Roots 6.5.2
+ * Roots 7.0.3
  */
 $bootstrap-sass-asset-helper: false;
 @import "bootstrap/bootstrap";
@@ -32,14 +32,28 @@ body { }
    Primary Content
    ========================================================================== */
 
-.main { }
-
-.wp-caption-text {
-
+// Content wrapper
+.wrap { }
+// Main content area
+.main {
+    @include make-sm-column(12);
+    .sidebar-primary & {
+        @include make-sm-column(12 - 4);
+    }
 }
 
-/* Gallery Shortcode */
-.gallery-row { padding: 15px 0; }
+// Captions
+.wp-caption {
+    @extend .thumbnail;
+}
+.wp-caption-text {
+    @extend .thumbnail;
+    @extend .caption;
+}
+// Gallery shortcode
+.gallery-row {
+    padding: 15px 0;
+}
 
 
 
@@ -47,7 +61,9 @@ body { }
    Sidebar
    ========================================================================== */
 
-.sidebar { }
+.sidebar {
+    @include make-sm-column(4);
+}
 
 
 
@@ -64,6 +80,30 @@ body { }
 
 
 /* ==========================================================================
+ Comments                                                                     
+ ========================================================================== */
+
+.comment-list {
+    @extend .list-unstyled ;
+}
+.comment-list ol {
+    list-style: none;
+}
+.comment-form p {
+    @extend .form-group ;
+}
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+    @extend .form-control ;
+}
+.comment-form input[type="submit"] {
+    @extend .btn ;
+    @extend .btn-primary ;
+}
+
+/* ==========================================================================
    Footer
    ========================================================================== */
 
@@ -76,10 +116,31 @@ body { }
    See: http://codex.wordpress.org/CSS#WordPress_Generated_Classes
    ========================================================================== */
 
-.aligncenter { display: block; margin: 0 auto; }
-.alignleft { float: left; }
-.alignright { float: right; }
-figure.alignnone { margin-left: 0; margin-right: 0; }
+
+.aligncenter {
+    display: block;
+    margin: ($line-height-computed / 2) auto;
+}
+.alignleft,
+.alignright {
+    margin-bottom: ($line-height-computed / 2);
+}
+figure.alignnone {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+}
+@media (min-width: $screen-sm-min) {
+    // Only float images if not on an extra small device like smartphones
+    .alignleft {
+        float: left;
+        margin-right: ($line-height-computed / 2);
+    }
+    .alignright {
+        float: right;
+        margin-left: ($line-height-computed / 2);
+    }
+}
 
 
 

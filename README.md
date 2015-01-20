@@ -9,7 +9,7 @@
 * assets/haml - templates folder files written in HAML
 * compass - grunt use compass for compile the SASS files
 * Gruntfile.js - modded for the new settings
-* lib/scripts.php - added a rule for WP_DEBUG enabled for insert livereload.js in the template
+* lib/scripts.php - added a rule for WP_DEBUG enabled for insert livereload in the template
 * Use WP_DEBUG instead WP_ENV
     
 ##Roots Readme

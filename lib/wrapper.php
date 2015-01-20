@@ -31,11 +31,16 @@ class Roots_Wrapping {
   }
 
   public function __toString() {
-    $this->templates = apply_filters('roots_wrap_' . $this->slug, $this->templates);
+    $this->templates = apply_filters('roots/wrap_' . $this->slug, $this->templates);
     return locate_template($this->templates);
   }
 
   static function wrap($main) {
+    // Check for other filters returning null
+    if (!is_string($main)) {
+      return $main;
+    }
+
     self::$main_template = $main;
     self::$base = basename(self::$main_template, '.php');
 

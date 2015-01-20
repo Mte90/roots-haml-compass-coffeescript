@@ -40,6 +40,6 @@ class Roots_Sidebar {
   }
 
   private function check_page_template($page_template) {
-    return is_page_template($page_template);
+    return is_page_template($page_template)|| Roots_Wrapping::$base . '.php' === $page_template;
   }
 }

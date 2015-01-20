@@ -1,6 +1,6 @@
 %form.search-form.form-inline(role="search" method="get" action="<?php echo home_url('/'); ?>")
 	%div.input-group
-		%input.search-field.form-control(type="search" value="<?php if (is_search()) { echo get_search_query(); } ?>" name="s" placeholder="<?php _e('Search', 'roots'); ?> <?php bloginfo('name'); ?>")
+		%input.search-field.form-control(type="search" value="<?php if (is_search()) { echo get_search_query(); } ?>" name="s" placeholder="<?php _e('Search', 'roots'); ?> <?php bloginfo('name'); ?>" required="required")
 		%label.hide= __('Search for:', 'roots')
 		%span.input-group-btn
 			%button.search-submit.btn.btn-default(type="submit")= __('Search', 'roots')
