@@ -1,7 +1,14 @@
 <?php
 /**
- * Roots includes
- */
+* Roots includes
+*
+* The $roots_includes array determines the code library included in your theme.
+* Add or remove files to the array as needed. Supports child theme overrides.
+*
+* Please note that missing files will produce a fatal error.
+*
+* @link https://github.com/roots/roots/pull/1042
+*/
 $roots_includes = array(
 	'/lib/utils.php', // Utility functions
 	'/lib/init.php', // Initial theme setup and constants
@@ -10,13 +17,10 @@ $roots_includes = array(
 	'/lib/config.php', // Configuration
 	'/lib/activation.php', // Theme activation
 	'/lib/titles.php', // Page titles
-	'/lib/cleanup.php', // Cleanup
 	'/lib/nav.php', // Custom nav modifications
 	'/lib/gallery.php', // Custom [gallery] modifications
-	'/lib/relative-urls.php', // Root relative URLs
-	'/lib/widgets.php', // Sidebars and widgets
 	'/lib/scripts.php', // Scripts and stylesheets
-	'/lib/custom.php', // Custom functions
+	'lib/extras.php', // Custom functions
 );
 
 foreach($roots_includes as $file){
