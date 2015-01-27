@@ -20,6 +20,7 @@ class Environment
         'cdata' => true,
         'autoclose' => array('meta', 'img', 'link', 'br', 'hr', 'input', 'area', 'param', 'col', 'base'),
         'charset' => 'UTF-8',
+        'enable_dynamic_attrs' => true,
     );
 
     protected $filters = array(
@@ -35,7 +36,6 @@ class Environment
 
     protected $target;
 
-
     public function __construct($target, array $options = array(), $filters = array())
     {
         $this->target = $target;
@@ -49,7 +49,7 @@ class Environment
 
         $node = $target->parse($this, $string, $filename);
 
-        foreach($this->getVisitors() as $visitor) {
+        foreach ($this->getVisitors() as $visitor) {
             $node->accept($visitor);
         }
 
@@ -113,18 +113,19 @@ class Environment
     {
         $target = $this->target;
         if (is_string($target)) {
-            switch($target) {
-            case 'php':
-                $target = new Php;
-                break;
-            case 'twig':
-                $target = new Twig;
-                break;
-            default:
-                throw new Exception(sprintf('Unknown target language: %s', $target));
+            switch ($target) {
+                case 'php':
+                    $target = new Php;
+                    break;
+                case 'twig':
+                    $target = new Twig;
+                    break;
+                default:
+                    throw new Exception(sprintf('Unknown target language: %s', $target));
             }
             $this->target = $target;
         }
+
         return $target;
     }
 
@@ -153,7 +154,7 @@ class Environment
         $attrs = EscapingVisitor::ESCAPE_TRUE;
         if ('once' === $this->getOption('escape_attrs')) {
             $attrs = EscapingVisitor::ESCAPE_ONCE;
-        } else if (!$this->getOption('escape_attrs')) {
+        } elseif (!$this->getOption('escape_attrs')) {
             $attrs = EscapingVisitor::ESCAPE_FALSE;
         }
 
@@ -175,4 +176,3 @@ class Environment
         return new MergeAttrs;
     }
 }
-

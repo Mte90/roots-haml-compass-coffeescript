@@ -5,6 +5,8 @@ namespace MtHaml\Tests {
 use MtHaml\Runtime;
 use MtHaml\Runtime\AttributeList;
 
+require_once __DIR__ . '/TestCase.php';
+
 class RuntimeTest extends TestCase
 {
     /**
@@ -176,6 +178,18 @@ class RuntimeTest extends TestCase
                     array('all', 'ok'),
                 ),
             ),
+            'attribute list are properly merged' => array(
+                'class="foo bar" id="x_43" all="ok"',
+                array(
+                    array('class', 'foo'),
+                    array('id', 'x'),
+                    AttributeList::create(array(
+                        'class' => 'bar',
+                        'id' => '43',
+                    )),
+                    array('all', 'ok'),
+                ),
+            ),
         );
     }
 
@@ -252,9 +266,10 @@ class RuntimeTest extends TestCase
             ob_start();
             require $file . '.php';
             $out = ob_get_clean();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertException($parts, $e);
             $this->cleanup($file);
+
             return;
         }
         $this->assertException($parts);
@@ -283,7 +298,8 @@ class RuntimeTest extends TestCase
         } else {
             $files = glob(__DIR__ . '/fixtures/runtime/*.test');
         }
-        return array_map(function($file) {
+
+        return array_map(function ($file) {
                 return array($file);
             }, $files);
     }

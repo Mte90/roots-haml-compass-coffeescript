@@ -70,12 +70,14 @@ abstract class RendererAbstract extends NodeVisitorAbstract
     public function indent()
     {
         $this->indent += 1;
+
         return $this;
     }
 
     public function undent()
     {
         $this->indent -= 1;
+
         return $this;
     }
 
@@ -91,30 +93,36 @@ abstract class RendererAbstract extends NodeVisitorAbstract
         return array_pop($this->savedIndent);
     }
 
-    public function write($string, $indent = true, $break = true)
+    public function write($string, $indent = true, $break = true, $filter = null)
     {
         if ($indent) {
             $this->writeIndentation();
         }
-        $this->raw($string);
+        $this->raw($string, $filter);
         $this->lineno += substr_count($string, "\n");
         if ($break) {
             $this->output .= "\n";
             $this->lineno++;
         }
+
         return $this;
     }
 
-    public function raw($string)
+    public function raw($string, $filter = null)
     {
+        if (null !== $filter) {
+            $string = call_user_func($filter, $string, $this->output);
+        }
         $this->output .= $string;
         $this->lineno += substr_count($string, "\n");
+
         return $this;
     }
 
     protected function writeIndentation()
     {
         $this->output .= str_repeat(' ', $this->indent * 2);
+
         return $this;
     }
 
@@ -128,7 +136,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
 
     abstract protected function writeDebugInfos($lineno);
 
-    abstract protected function escapeLanguage($string);
+    abstract protected function escapeLanguage($string, $context);
 
     abstract protected function stringLiteral($string);
 
@@ -164,7 +172,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
             }
         }
 
-        if (!$hasDynAttr) {
+        if (!$hasDynAttr || !$this->env->getOption('enable_dynamic_attrs')) {
             return;
         }
 
@@ -256,8 +264,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
                 $string = $this->escapeHtml($string, !$once);
             }
 
-            $string = $this->escapeLanguage($string);
-            $this->raw($string);
+            $this->raw($string, array($this, 'escapeLanguage'));
         } else {
             $string = $this->stringLiteral($string);
             $this->raw($string);
@@ -282,7 +289,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
     public function enterDoctype(Doctype $node)
     {
         $doctype = $node->getDoctype($this->env->getOption('format'));
-        $this->write($this->escapeLanguage($doctype));
+        $this->write($doctype, true, true, array($this, 'escapeLanguage'));
     }
 
     public function enterComment(Comment $comment)
@@ -299,7 +306,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
 
         if ($comment->hasContent()) {
             $this->write($open . ' ', $comment->hasParent(), false);
-        } else if ($comment->hasChilds()) {
+        } elseif ($comment->hasChilds()) {
             $this->write($open, true, true)->indent();
         }
     }
@@ -318,7 +325,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
 
         if ($comment->hasContent()) {
             $this->write(' ' . $close, false, $comment->hasParent());
-        } else if ($comment->hasChilds()) {
+        } elseif ($comment->hasChilds()) {
             $this->undent()->write($close, true, true);
         }
     }
@@ -395,6 +402,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
         if (null !== $node->getPreviousSibling()) {
             return;
         }
+
         return $this->getParentTag($node);
     }
 
@@ -403,6 +411,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
         if (null !== $node->getNextSibling()) {
             return;
         }
+
         return $this->getParentTag($node);
     }
 
@@ -426,6 +435,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
         if (!($first instanceof Tag)) {
             return;
         }
+
         return $first;
     }
 
@@ -440,6 +450,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
         if (!($last instanceof Tag)) {
             return;
         }
+
         return $last;
     }
 
@@ -451,6 +462,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
         if (!($tag instanceof Tag)) {
             return;
         }
+
         return $tag;
     }
 
@@ -462,6 +474,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
         if (!($tag instanceof Tag)) {
             return;
         }
+
         return $tag;
     }
 
@@ -482,6 +495,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
                 return false;
             }
         }
+
         return true;
     }
 
@@ -519,6 +533,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
                 return false;
             }
         }
+
         return true;
     }
 
@@ -539,6 +554,7 @@ abstract class RendererAbstract extends NodeVisitorAbstract
                 return false;
             }
         }
+
         return true;
     }
 
@@ -563,4 +579,3 @@ abstract class RendererAbstract extends NodeVisitorAbstract
         $this->echoMode = array_pop($this->echoModeStack);
     }
 }
-

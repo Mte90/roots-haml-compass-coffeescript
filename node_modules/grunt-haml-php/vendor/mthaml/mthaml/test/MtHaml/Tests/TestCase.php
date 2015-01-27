@@ -10,6 +10,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             if (null !== $e) {
                 throw $e;
             }
+
             return;
         }
 
@@ -36,7 +37,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
     public function parseTestFile($file)
     {
         $contents = file_get_contents($file);
-        $splits = preg_split('#^--(.*)--$#m', $contents, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $splits = preg_split('#^--([^-]*)--$#m', $contents, -1, PREG_SPLIT_DELIM_CAPTURE);
         $parts = array();
 
         while (false !== $key = next($splits)) {
@@ -46,4 +47,3 @@ class TestCase extends \PHPUnit_Framework_TestCase
         return $parts;
     }
 }
-
