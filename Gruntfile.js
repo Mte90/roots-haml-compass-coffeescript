@@ -17,7 +17,11 @@ module.exports = function(grunt) {
         options: {
           sassDir: 'assets/sass',
           cssDir: 'assets/css',
-          environment: 'production'
+          environment: 'production',
+          imagesDir: "assets/img/",
+          generatedImagesDir: "assets/img/sprites/",
+          generatedImagesPath: "assets/img/sprites/",
+          httpGeneratedImagesPath: "../img/sprites"
         }
       },
       debug: {
@@ -28,7 +32,11 @@ module.exports = function(grunt) {
           sassDir: 'assets/sass',
           cssDir: 'assets/css',
 		  outputStyle: 'expanded',
-		  relativeAssets: true
+		  relativeAssets: true,
+          imagesDir: "assets/img/",
+          generatedImagesDir: "assets/img/sprites/",
+          generatedImagesPath: "assets/img/sprites/",
+          httpGeneratedImagesPath: "../img/sprites"
         }
       }
     },
