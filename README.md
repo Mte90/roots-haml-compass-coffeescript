@@ -3,7 +3,7 @@
 ##Difference from original Roots
 
 * grunt-haml-php - Modded for the last version of MTHAML and fix for the compile [#7](https://github.com/alexluke/grunt-haml-php/issues/7) and [#8](https://github.com/alexluke/grunt-haml-php/issues/8) (not in the dependence of packages.json!)
-* assetes/sass - SASS folders
+* assets/sass - SASS folders
 * assets/sass/bootstrap - Bootstrap the SASS way (remember to update with the last version (and rename bootstrap.scss in _bootstrap.scss))
 * assets/coffee - _main.js file converted in coffeescript
 * assets/haml - templates folder files written in HAML
